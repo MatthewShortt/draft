@@ -1,0 +1,7 @@
+version: '3'
+services: 
+  database:
+    image: 'mongo'
+    container_name: 'draft-mongo-container'
+    ports:
+      - 27017:27017
