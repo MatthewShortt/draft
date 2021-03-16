@@ -24,6 +24,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "ioredis": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
     "moleculer": "^0.14.10",
     "moleculer-db": "^0.8.4",
     "moleculer-db-adapter-mongo": "^0.4.7",
