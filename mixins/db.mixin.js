@@ -1,13 +1,15 @@
 "use strict";
 
 const fs = require("fs");
-const DbService	= require("moleculer-db");
+const DbService = require("moleculer-db");
+const Hashids = require("hashids");
+const hashids = new Hashids(process.env.DB_ENCODE_SALT);
 
 /**
  * @typedef {import('moleculer').Context} Context Moleculer's Context
  */
 
-module.exports = function(collection) {
+module.exports = function (collection) {
 	const cacheCleanEventName = `cache.clean.${collection}`;
 
 	const schema = {
@@ -37,6 +39,14 @@ module.exports = function(collection) {
 			 */
 			async entityChanged(type, json, ctx) {
 				ctx.broadcast(cacheCleanEventName);
+			},
+
+			encodeID(id) {
+				return hashids.encodeHex(id);
+			},
+
+			decodeID(id) {
+				return hashids.decodeHex(id);
 			}
 		},
 
@@ -71,7 +81,7 @@ module.exports = function(collection) {
 			fs.mkdirSync("./data");
 		}
 
-		schema.adapter = new DbService.MemoryAdapter({ filename: `./data/${collection}.db` });
+		schema.adapter = new DbService.MemoryAdapter({filename: `./data/${collection}.db`});
 	}
 
 	return schema;

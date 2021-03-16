@@ -76,7 +76,7 @@ module.exports = {
 					password: saltHashPassword
 				});
 
-				const token = await this.generateJWT(user);
+				const token = await this.generateJWT({ id: this.encodeID(user._id.toString()), ...user });
 				return {
 					token,
 					username: user.username,

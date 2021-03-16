@@ -25,6 +25,7 @@ module.exports = {
 				user: {
 					type: 'object',
 					props: {
+						id: 'string',
 						username: 'string'
 					}
 				}
@@ -33,7 +34,8 @@ module.exports = {
 				const { user } = ctx.params;
 				const payload = {
 					iss: 'draft',
-					sub: user.username,
+					sub: user.id,
+					username: user.username,
 					scopes: ['general']
 				};
 				return JWT.sign(payload, this.PRIVATE_KEY, { algorithm: 'RS256', expiresIn: '2h' });

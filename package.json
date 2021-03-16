@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "dotenv": "^8.2.0",
+    "hashids": "^2.2.8",
     "ioredis": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "moleculer": "^0.14.10",
